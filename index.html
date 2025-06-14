@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site romântico no estilo Netflix para o Dia dos Namorados - 3 Anos de Eternos Namorados">
+    <meta name="keywords" content="netflix, romântico, dia dos namorados, amor, fotos, música">
+    <meta name="author" content="Netflix Romântico">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netflix-romantico.vercel.app/">
+    <meta property="og:title" content="3 Anos de Eternos Namorados - Netflix Romântico">
+    <meta property="og:description" content="Uma experiência romântica especial no estilo Netflix">
+    <meta property="og:image" content="https://netflix-romantico.vercel.app/preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://netflix-romantico.vercel.app/">
+    <meta property="twitter:title" content="3 Anos de Eternos Namorados - Netflix Romântico">
+    <meta property="twitter:description" content="Uma experiência romântica especial no estilo Netflix">
+    <meta property="twitter:image" content="https://netflix-romantico.vercel.app/preview.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+
+    <title>3 Anos de Eternos Namorados - Netflix</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Movie Background */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)),
+                        url('images/DSC02525.JPG') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 20px 120px 20px;
+            background-attachment: fixed; /* Efeito parallax */
+        }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            background: rgba(42, 42, 42, 0.6);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .back-button svg {
+            fill: #ffffff;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Movie Title */
+        .movie-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            line-height: 1.1;
+        }
+
+        /* Movie Info */
+        .movie-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .release-info {
+            color: #46d369;
+            font-weight: 600;
+        }
+
+        .quality-badge {
+            background: #666666;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .trending-badge {
+            background: #e50914;
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Movie Description */
+        .movie-description {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 90%;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .play-button {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .favorite-button {
+            background: rgba(42, 42, 42, 0.8);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-button:hover {
+            background: rgba(42, 42, 42, 1);
+        }
+
+        /* Content Section */
+        .content-section {
+            background: #000000;
+            padding: 40px 20px;
+            min-height: 50vh;
+        }
+
+        /* Photos Section */
+        .photos-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .photo-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(42, 42, 42, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .photo-item:hover {
+            background: rgba(42, 42, 42, 0.6);
+        }
+
+        .photo-thumbnail {
+            width: 120px;
+            height: 80px;
+            background-color: #e50914;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            border-radius: 8px;
+            margin-right: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover .photo-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .photo-content {
+            flex: 1;
+        }
+
+        .photo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .photo-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .photo-count {
+            color: #666666;
+            font-size: 0.8rem;
+        }
+
+        .photo-description {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* More Like This Section */
+        .similar-content {
+            margin-top: 40px;
+        }
+
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .similar-item {
+            aspect-ratio: 16/9;
+            background: linear-gradient(45deg, #ff6b9d, #e91e63, #ad1457);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .similar-item:hover {
+            transform: scale(1.05);
+        }
+
+        .similar-item-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 15px 10px 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .similar-item:hover .similar-item-content {
+            opacity: 1;
+        }
+
+        .similar-item-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .similar-item-rating {
+            font-size: 0.8rem;
+            color: #cccccc;
+        }
+
+        /* Floating Menu */
+        .floating-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover {
+            opacity: 0.7;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        .menu-label {
+            font-size: 0.7rem;
+            color: #cccccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .movie-title {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 0 15px 140px 15px;
+            }
+
+            .content-section {
+                padding: 30px 15px;
+            }
+
+            .similar-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photo-thumbnail {
+                width: 100px;
+                height: 56px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 2s infinite;
+        }
+
+        /* Heart Animation for Romantic Theme */
+        @keyframes heartFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+                opacity: 1;
+            }
+        }
+
+        .romantic-float {
+            animation: heartFloat 3s ease-in-out infinite;
+        }
+
+        /* Netflix Header Styles */
+        .netflix-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 110px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            z-index: 99;
+            padding: 0 4%;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .netflix-header.scrolled {
+            background-color: transparent;
+        }
+
+        .netflix-header.scrolled .header-nav {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .netflix-header.scrolled .logo-image {
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-logo {
+            margin-right: 40px;
+            margin-left: 10px;
+        }
+
+        .logo-image {
+            height: 90px;
+            width: auto;
+        }
+
+        .header-nav {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .header-nav li {
+            margin-right: 20px;
+        }
+
+        .header-nav a {
+            color: #e5e5e5;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .header-nav a.active, .header-nav a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+        }
+
+        /* Modal para visualização ampliada das fotos */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .photo-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .modal-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Verificar se o usuário veio da página de perfis
+        window.onload = function() {
+            const selectedProfile = localStorage.getItem('selectedProfile');
+
+            // Se não tiver perfil selecionado, redirecionar para a página de perfis
+            if (!selectedProfile) {
+                window.location.href = 'profiles.html';
+            }
+        };
+    </script>
+    <!-- Profile Info -->
+    <div style="position: absolute; top: 15px; right: 20px; z-index: 100; display: flex; align-items: center;">
+        <span id="profileName" style="margin-right: 10px; font-size: 14px; opacity: 0.8;"></span>
+        <div style="width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer;" id="profileIcon" onclick="window.location.href='profiles.html'">
+            <span style="font-size: 20px;">◠‿◠</span>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button" onclick="history.back()" aria-label="Voltar">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.42-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </button>
+
+    <!-- Header Netflix Style -->
+    <header class="netflix-header">
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="images/lgoufardini.png" alt="GOUFARDINI" class="logo-image">
+            </div>
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="#" class="active">Início</a></li>
+                    <li><a href="#">Fotos</a></li>
+                    <li><a href="#">Lembranças</a></li>
+                    <li><a href="#">Momentos</a></li>
+                    <li><a href="#">Nosso Amor</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="movie-title">3 ANOS DE ETERNOS NAMORADOS</h1>
+
+        <div class="movie-info">
+            <span class="release-info">Estreou em 02/04/2022</span>
+            <span class="quality-badge">HD</span>
+            <div class="trending-badge">
+                📈 Em alta no momento
+            </div>
+        </div>
+
+        <p class="movie-description">
+            Feliz Dia dos Namorados, meu amor!<br>
+            Sou grato por cada momento ao teu lado,<br>
+            pelas risadas, pelo apoio, pela leveza que<br>
+            você traz pra minha vida.<br><br>
+            Você é minha melhor amiga, minha<br>
+            parceira, minha cacheada linda que ilumina<br>
+            tudo.<br><br>
+            Que a gente continue construindo nossos<br>
+            dias com amor, respeito e muito carinho.<br>
+            Te amo de mais minha cacheada ❤️
+        </p>
+
+        <div class="action-buttons">
+            <button class="play-button" onclick="playContent()" aria-label="Reproduzir música">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+                Reproduzir
+            </button>
+
+            <button class="favorite-button" onclick="toggleFavorite()" aria-label="Adicionar aos favoritos">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                Favorito
+            </button>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <!-- Photo Gallery Section -->
+        <div class="photos-section">
+            <div class="section-header">
+                <div class="section-title">
+                    📸 Galeria de Fotos
+                </div>
+            </div>
+
+            <div class="photo-gallery">
+                <div class="photo-item" onclick="openPhotoModal('images/DSC02525.JPG', 'Nossos Momentos Especiais')">
+                    <div class="photo-thumbnail">
+                        <img src="images/DSC02525.JPG" alt="Nossos Momentos Especiais">
+                    </div>
+                    <div class="photo-content">
+                        <div class="photo-header">
+                            <div class="photo-title">Nossos Momentos Especiais</div>
+                            <div class="photo-count">24 fotos</div>
+                        </div>
+                        <div class="photo-description">
+                            Uma coleção dos nossos momentos mais preciosos juntos.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-item" onclick="openPhotoModal('images/IMG_2508.JPG', 'Viagens e Aventuras')">
+                    <div class="photo-thumbnail">
+                        <img src="images/IMG_2508.JPG" alt="Viagens e Aventuras">
+                    </div>
+                    <div class="photo-content">
+                        <div class="photo-header">
+                            <div class="photo-title">Viagens e Aventuras</div>
+                            <div class="photo-count">18 fotos</div>
+                        </div>
+                        <div class="photo-description">
+                            Registros das nossas aventuras e descobertas pelo mundo.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-item" onclick="openPhotoModal('images/lgoufardini.png', 'Datas Especiais')">
+                    <div class="photo-thumbnail">
+                        <img src="images/lgoufardini.png" alt="Datas Especiais">
+                    </div>
+                    <div class="photo-content">
+                        <div class="photo-header">
+                            <div class="photo-title">Datas Especiais</div>
+                            <div class="photo-count">12 fotos</div>
+                        </div>
+                        <div class="photo-description">
+                            Comemorações, aniversários e marcos importantes da nossa relação.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-item" onclick="openPhotoModal('images/DSC02525.JPG', 'Momentos Espontâneos')">
+                    <div class="photo-thumbnail">
+                        <img src="images/DSC02525.JPG" alt="Momentos Espontâneos">
+                    </div>
+                    <div class="photo-content">
+                        <div class="photo-header">
+                            <div class="photo-title">Momentos Espontâneos</div>
+                            <div class="photo-count">31 fotos</div>
+                        </div>
+                        <div class="photo-description">
+                            Risadas, carinhos e momentos únicos do nosso dia a dia.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Photos -->
+        <div class="similar-content">
+            <div class="section-title">📷 Mais álbuns de fotos</div>
+            <div class="similar-grid">
+                <div class="similar-item">
+                    📸
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Selfies Juntos</div>
+                        <div class="similar-item-rating">15 fotos</div>
+                    </div>
+                </div>
+
+                <div class="similar-item">
+                    🌅
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Pôr do Sol</div>
+                        <div class="similar-item-rating">8 fotos</div>
+                    </div>
+                </div>
+
+                <div class="similar-item">
+                    🍽️
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Jantares Românticos</div>
+                        <div class="similar-item-rating">22 fotos</div>
+                    </div>
+                </div>
+
+                <div class="similar-item">
+                    🏖️
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Praia e Mar</div>
+                        <div class="similar-item-rating">19 fotos</div>
+                    </div>
+                </div>
+
+                <div class="similar-item">
+                    🎂
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Aniversários</div>
+                        <div class="similar-item-rating">11 fotos</div>
+                    </div>
+                </div>
+
+                <div class="similar-item">
+                    🌸
+                    <div class="similar-item-content">
+                        <div class="similar-item-title">Flores e Jardins</div>
+                        <div class="similar-item-rating">13 fotos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Bottom Menu -->
+    <div class="floating-menu">
+        <div class="menu-item" onclick="goHome()">
+            <svg class="menu-icon" viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span class="menu-label">Início</span>
+        </div>
+
+        <div class="menu-item" onclick="redeemGift()">
+            <svg class="menu-icon" viewBox="0 0 24 24">
+                <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+            </svg>
+            <span class="menu-label">Resgatar Presente</span>
+        </div>
+
+        <div class="menu-item" onclick="showProfile()">
+            <svg class="menu-icon" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span class="menu-label">Meu Netflix</span>
+        </div>
+    </div>
+
+    <script>
+        // Play main content with music
+        function playContent() {
+            // Create music player modal
+            const musicModal = document.createElement('div');
+            musicModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+            `;
+
+            musicModal.innerHTML = `
+                <div style="
+                    background: linear-gradient(135deg, #ff6b9d, #e91e63);
+                    padding: 40px;
+                    border-radius: 20px;
+                    text-align: center;
+                    max-width: 400px;
+                    width: 100%;
+                    color: white;
+                    box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+                ">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🎵</div>
+                    <h2 style="margin-bottom: 10px; font-size: 1.5rem;">Tocando Agora</h2>
+                    <h3 style="margin-bottom: 20px; font-size: 1.2rem; opacity: 0.9;">Ser Humano ou Anjo</h3>
+                    <p style="margin-bottom: 30px; opacity: 0.8;">Matheus e Kauan</p>
+
+                    <div id="musicProgress" style="
+                        width: 100%;
+                        height: 4px;
+                        background: rgba(255,255,255,0.3);
+                        border-radius: 2px;
+                        margin-bottom: 20px;
+                        overflow: hidden;
+                    ">
+                        <div id="progressBar" style="
+                            width: 0%;
+                            height: 100%;
+                            background: white;
+                            border-radius: 2px;
+                            transition: width 0.1s ease;
+                        "></div>
+                    </div>
+
+                    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
+                        <button onclick="previousTrack()" style="
+                            background: rgba(255,255,255,0.2);
+                            border: none;
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                            color: white;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        ">⏮️</button>
+
+                        <button id="playPauseBtn" onclick="togglePlayPause()" style="
+                            background: white;
+                            border: none;
+                            border-radius: 50%;
+                            width: 60px;
+                            height: 60px;
+                            color: #e91e63;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.5rem;
+                        ">⏸️</button>
+
+                        <button onclick="nextTrack()" style="
+                            background: rgba(255,255,255,0.2);
+                            border: none;
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                            color: white;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        ">⏭️</button>
+                    </div>
+
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px;">💕 Uma música especial para nosso amor 💕</p>
+
+                    <button onclick="closeMusicPlayer()" style="
+                        background: rgba(255,255,255,0.2);
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 25px;
+                        cursor: pointer;
+                        font-weight: 600;
+                    ">Fechar Player</button>
+                </div>
+            `;
+
+            document.body.appendChild(musicModal);
+
+            // Simulate music progress
+            let progress = 0;
+            let isPlaying = true;
+            let progressInterval;
+
+            // Store references for global access
+            window.currentMusicModal = musicModal;
+            window.musicProgress = progress;
+            window.isPlaying = isPlaying;
+
+            function updateProgress() {
+                if (isPlaying && progress < 100) {
+                    progress += 0.2; // Simulate 5 minute song
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    window.musicProgress = progress;
+                }
+
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    document.getElementById('playPauseBtn').textContent = '▶️';
+                    setTimeout(() => {
+                        showCustomAlert('🎵 Música finalizada!\n\n💕 "Ser Humano ou Anjo" terminou de tocar.\n\nEspero que tenha curtido nossa música especial! 💕');
+                    }, 1000);
+                }
+            }
+
+            progressInterval = setInterval(updateProgress, 100);
+
+            // Global functions for music controls
+            window.togglePlayPause = function() {
+                isPlaying = !isPlaying;
+                window.isPlaying = isPlaying;
+                document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸️' : '▶️';
+
+                if (isPlaying) {
+                    progressInterval = setInterval(updateProgress, 100);
+                } else {
+                    clearInterval(progressInterval);
+                }
+            };
+
+            window.previousTrack = function() {
+                showCustomAlert('⏮️ Música anterior\n\n💕 Voltando para "Amo Noite e Dia" de Jorge e Mateus');
+            };
+
+            window.nextTrack = function() {
+                showCustomAlert('⏭️ Próxima música\n\n💕 Tocando "10%" de Maiara e Maraisa');
+            };
+
+            window.closeMusicPlayer = function() {
+                clearInterval(progressInterval);
+                musicModal.remove();
+                // Clean up global functions
+                delete window.currentMusicModal;
+                delete window.togglePlayPause;
+                delete window.previousTrack;
+                delete window.nextTrack;
+                delete window.closeMusicPlayer;
+            };
+
+            // Close on background click
+            musicModal.addEventListener('click', (e) => {
+                if (e.target === musicModal) {
+                    window.closeMusicPlayer();
+                }
+            });
+
+            // Simulate audio context for better experience
+            if (window.AudioContext || window.webkitAudioContext) {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                    // Create a simple tone to simulate music start
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4 note
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } catch (e) {
+                    console.log('Audio context not available');
+                }
+            }
+        }
+
+        // Toggle favorite
+        function toggleFavorite() {
+            const btn = document.querySelector('.favorite-button');
+
+            if (btn.textContent.includes('Favorito')) {
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    Adicionado à Minha Lista
+                `;
+                btn.style.background = 'rgba(70, 211, 105, 0.8)';
+            } else {
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    Favorito
+                `;
+                btn.style.background = 'rgba(42, 42, 42, 0.8)';
+            }
+        }
+
+        // Função para abrir o modal da foto em tamanho ampliado
+        function openPhotoModal(imageSrc, caption) {
+            const modal = document.getElementById('photoModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+
+            modalImg.src = imageSrc;
+            modalCaption.textContent = caption;
+            modal.classList.add('active');
+
+            // Desabilitar scroll da página quando o modal está aberto
+            document.body.style.overflow = 'hidden';
+
+            // Criar efeito de corações ao abrir a imagem
+            createHeartParticles(window.innerWidth / 2, window.innerHeight / 2);
+
+            // Fechar modal ao clicar fora da imagem
+            modal.onclick = function(e) {
+                if (e.target === modal) {
+                    closePhotoModal();
+                }
+            };
+
+            // Adicionar evento para fechar com ESC
+            document.addEventListener('keydown', closeOnEscape);
+        }
+
+        // Função para fechar o modal da foto
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('active');
+
+            // Habilitar scroll da página novamente
+            document.body.style.overflow = 'auto';
+
+            // Remover evento de tecla ESC
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+
+        // Função auxiliar para fechar com ESC
+        function closeOnEscape(e) {
+            if (e.key === 'Escape') {
+                closePhotoModal();
+            }
+        }
+
+        // View photo gallery - função legada mantida para compatibilidade
+        function viewPhoto(galleryNumber) {
+            const galleries = [
+                'Nossos Momentos Especiais',
+                'Viagens e Aventuras',
+                'Datas Especiais',
+                'Momentos Espontâneos'
+            ];
+
+            // Determinar qual imagem abrir com base no número da galeria
+            let imageSrc = '';
+            switch(galleryNumber) {
+                case 1:
+                    imageSrc = 'images/DSC02525.JPG';
+                    break;
+                case 2:
+                    imageSrc = 'images/goufardini logo.png';
+                    break;
+                case 3:
+                    imageSrc = 'images/lgoufardini.png';
+                    break;
+                case 4:
+                    imageSrc = 'images/DSC02525.JPG';
+                    break;
+                default:
+                    imageSrc = 'images/DSC02525.JPG';
+            }
+
+            // Abrir modal com a imagem correspondente
+            openPhotoModal(imageSrc, galleries[galleryNumber-1]);
+        }
+
+        // Navigation functions
+        function goHome() {
+            showCustomAlert('🏠 Navegando para a página inicial...');
+        }
+
+        // Redeem gift function
+        function redeemGift() {
+            showCustomAlert('🎁 RESGATANDO SEU PRESENTE ESPECIAL! 🎁\n\n💕 Parabéns! Você ganhou:\n\n✨ 1 Jantar Romântico\n🌹 1 Buquê de Flores\n💖 1 Sessão de Fotos Juntos\n🍷 1 Noite Especial\n\n💝 Seus presentes estão sendo preparados com muito carinho! Te amo! 💝');
+        }
+
+        function showProfile() {
+            showCustomAlert('👤 Seu perfil Netflix:\n\n💕 Gêneros favoritos: Romance, Galeria de Fotos\n📸 Álbuns salvos: 12 coleções especiais\n⭐ Memórias favoritas: 247 fotos marcadas');
+        }
+
+        // Custom alert function with Netflix styling
+        function showCustomAlert(message) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+            `;
+
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: #181818;
+                padding: 30px;
+                border-radius: 8px;
+                max-width: 400px;
+                width: 100%;
+                color: white;
+                text-align: center;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+            `;
+
+            content.innerHTML = `
+                <div style="white-space: pre-line; margin-bottom: 20px; line-height: 1.5;">${message}</div>
+                <button onclick="this.closest('div').remove()" style="
+                    background: #e50914;
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 1rem;
+                ">OK</button>
+            `;
+
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+
+            // Close on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // Add haptic feedback simulation for mobile
+        function addHapticFeedback(element) {
+            element.addEventListener('click', function() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        }
+
+        // Apply haptic feedback to interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const interactiveElements = document.querySelectorAll('.play-button, .favorite-button, .photo-item, .menu-item, .similar-item');
+            interactiveElements.forEach(addHapticFeedback);
+        });
+
+        // Add swipe gestures for mobile navigation
+        let startX = null;
+        let startY = null;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            if (!startX || !startY) return;
+
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            // Swipe right to go back
+            if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50) {
+                history.back();
+            }
+
+            startX = null;
+            startY = null;
+        });
+
+        // Add progressive loading animation
+        function animateProgressiveLoad() {
+            const elements = document.querySelectorAll('.photo-item, .similar-item');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Initialize progressive loading
+        document.addEventListener('DOMContentLoaded', animateProgressiveLoad);
+
+        // Add dynamic background color based on scroll
+        window.addEventListener('scroll', function() {
+            const scrollPercent = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+            const contentSection = document.querySelector('.content-section');
+
+            if (scrollPercent > 0.3) {
+                contentSection.style.background = `linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%)`;
+            } else {
+                contentSection.style.background = '#000000';
+            }
+        });
+
+        // Easter egg: Konami code for special message
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
+
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (konamiCode.length === konamiSequence.length &&
+                konamiCode.every((key, index) => key === konamiSequence[index])) {
+                showCustomAlert('🎉 CÓDIGO SECRETO ATIVADO! 🎉\n\n💕 Você desbloqueou uma mensagem especial:\n\n"Nosso amor é como o código Konami - uma sequência perfeita que unlockeia felicidade infinita! Te amo para sempre, minha cacheada linda!" 💕\n\n✨ Bonus: +30 vidas no jogo do amor! ✨');
+                konamiCode = [];
+            }
+        });
+
+        // Add heart particle effect on special interactions
+        function createHeartParticles(x, y) {
+            const hearts = ['💕', '💖', '💘', '💝', '💞', '💗'];
+
+            for (let i = 0; i < 6; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.cssText = `
+                    position: fixed;
+                    left: ${x}px;
+                    top: ${y}px;
+                    font-size: 1.5rem;
+                    pointer-events: none;
+                    z-index: 9999;
+                    animation: heartFloat 2s ease-out forwards;
+                    transform: translate(-50%, -50%);
+                `;
+
+                // Random direction
+                const angle = (Math.PI * 2 * i) / 6;
+                const distance = 50 + Math.random() * 50;
+
+                heart.style.setProperty('--end-x', `${Math.cos(angle) * distance}px`);
+                heart.style.setProperty('--end-y', `${Math.sin(angle) * distance - 100}px`);
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+
+        // Add heart particles animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes heartParticle {
+                0% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add heart particles on favorite button click
+        document.querySelector('.favorite-button').addEventListener('click', function(e) {
+            const rect = e.target.getBoundingClientRect();
+            createHeartParticles(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2
+            );
+        });
+
+        // Add special Valentine's Day messages
+        const valentineMessages = [
+            "💕 Todo dia ao seu lado é como o Dia dos Namorados! 💕",
+            "🌹 Você é a flor mais bonita do meu jardim! 🌹",
+            "💖 Meu coração bate no ritmo do seu nome! 💖",
+            "✨ Com você, cada momento vira magia! ✨",
+            "💘 Você é minha série favorita - nunca me canso de assistir! 💘"
+        ];
+
+        // Show random Valentine message every 30 seconds
+        setInterval(() => {
+            if (Math.random() > 0.7) { // 30% chance
+                const message = valentineMessages[Math.floor(Math.random() * valentineMessages.length)];
+
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #ff6b9d, #e91e63);
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 25px;
+                    font-size: 0.9rem;
+                    z-index: 9999;
+                    transform: translateX(100%);
+                    transition: transform 0.5s ease;
+                    max-width: 250px;
+                    text-align: center;
+                    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+                `;
+                notification.textContent = message;
+
+                document.body.appendChild(notification);
+
+                // Animate in
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Animate out
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => notification.remove(), 500);
+                }, 4000);
+            }
+        }, 30000);
+
+        // Add special effects for mobile taps
+        document.addEventListener('touchstart', function(e) {
+            const touch = e.touches[0];
+            createRippleEffect(touch.clientX, touch.clientY);
+        });
+
+        function createRippleEffect(x, y) {
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                width: 20px;
+                height: 20px;
+                background: radial-gradient(circle, rgba(255,107,157,0.6) 0%, transparent 70%);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+                z-index: 9998;
+                animation: ripple 0.6s ease-out forwards;
+            `;
+
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Add ripple animation
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                0% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Console surprise message
+        console.log(`
+        ╔══════════════════════════════════════════════════════════════╗
+        ║                                                              ║
+        ║   💕💖💘 FELIZ DIA DOS NAMORADOS, MEU AMOR! 💘💖💕          ║
+        ║                                                              ║
+        ║   Esse site foi feito com muito carinho especialmente       ║
+        ║   para você, minha cacheada linda! 🥰                       ║
+        ║                                                              ║
+        ║   Obrigado por ser minha melhor amiga, parceira e           ║
+        ║   minha pessoa favorita no mundo inteiro! ✨                ║
+        ║                                                              ║
+        ║   Te amo infinitamente! ❤️                                  ║
+        ║                                                              ║
+        ╚══════════════════════════════════════════════════════════════╝
+        `);
+
+        // Add network status simulation
+        let isOnline = navigator.onLine;
+
+        window.addEventListener('online', () => {
+            isOnline = true;
+            showNetworkStatus('🌐 Conectado - Pronto para assistir!', 'success');
+        });
+
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            showNetworkStatus('📱 Offline - Conteúdo salvo disponível', 'warning');
+        });
+
+        function showNetworkStatus(message, type) {
+            const statusDiv = document.createElement('div');
+            const bgColor = type === 'success' ? '#46d369' : '#ff9500';
+
+            statusDiv.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: ${bgColor};
+                color: white;
+                text-align: center;
+                padding: 10px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                z-index: 10001;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            `;
+            statusDiv.textContent = message;
+
+            document.body.appendChild(statusDiv);
+
+            setTimeout(() => {
+                statusDiv.style.transform = 'translateY(0)';
+            }, 100);
+
+            setTimeout(() => {
+                statusDiv.style.transform = 'translateY(-100%)';
+                setTimeout(() => statusDiv.remove(), 300);
+            }, 3000);
+        }
+
+        // Add header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.netflix-header');
+            const headerNav = document.querySelector('.header-nav');
+
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+                headerNav.style.opacity = '0';
+                headerNav.style.visibility = 'hidden';
+            } else {
+                header.classList.remove('scrolled');
+                headerNav.style.opacity = '1';
+                headerNav.style.visibility = 'visible';
+            }
+        });
+
+        // Initialize all features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set profile info
+            const selectedProfile = localStorage.getItem('selectedProfile');
+            if (selectedProfile) {
+                document.getElementById('profileName').textContent = selectedProfile;
+
+                // Set profile icon color based on name
+                const profileIcon = document.getElementById('profileIcon');
+                if (selectedProfile === 'Giovanni') {
+                    profileIcon.style.backgroundColor = '#0077c8';
+                } else if (selectedProfile === 'GOUFARDINI') {
+                    // Usar a imagem em vez da cor sólida
+                    profileIcon.innerHTML = '<img src="images/goufardini logo.png" alt="GOUFARDINI" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">';
+                } else if (selectedProfile === 'duda') {
+                    profileIcon.style.backgroundColor = '#0e7490';
+                } else if (selectedProfile === 'Infantil') {
+                    profileIcon.style.background = 'linear-gradient(to right, #ff71ce, #ffd670, #01cdfe)';
+                }
+            }
+            // Add loading states
+            document.querySelectorAll('.photo-item, .similar-item').forEach(item => {
+                item.classList.add('loading');
+            });
+
+            // Remove loading after delay
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach(item => {
+                    item.classList.remove('loading');
+                });
+            }, 1500);
+
+            console.log('🎬 Netflix Valentine\'s Edition carregado com sucesso! 💕');
+        });
+
+        // Add romantic floating animation to emojis
+        document.addEventListener('DOMContentLoaded', function() {
+            const emojis = document.querySelectorAll('.photo-thumbnail, .similar-item');
+            emojis.forEach((emoji, index) => {
+                setTimeout(() => {
+                    emoji.classList.add('romantic-float');
+                }, index * 200);
+            });
+        });
+
+        // Add scroll effect for hero section
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero-section');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
+
+    <!-- Modal de Visualização de Fotos -->
+    <div id="photoModal" class="photo-modal">
+        <div class="modal-close" onclick="closePhotoModal()">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+            </svg>
+        </div>
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="Foto ampliada">
+            <div id="modalCaption" class="modal-caption"></div>
+        </div>
+    </div>
+</body>
+</html>

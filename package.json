@@ -1,0 +1,21 @@
+{
+  "name": "netflix-romantico",
+  "version": "1.0.0",
+  "description": "Site romântico no estilo Netflix para o Dia dos Namorados",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve",
+    "build": "echo 'No build step required'",
+    "start": "serve"
+  },
+  "keywords": [
+    "netflix",
+    "romântico",
+    "dia dos namorados"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.0.1"
+  }
+}
