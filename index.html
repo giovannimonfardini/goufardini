@@ -834,6 +834,17 @@
                 padding: 20px;
             `;
 
+            // Criar o elemento de áudio
+            const audioPlayer = document.createElement('audio');
+            audioPlayer.src = 'music/musica.mp3';
+            audioPlayer.id = 'musicAudio';
+            audioPlayer.style.display = 'none';
+            document.body.appendChild(audioPlayer);
+
+            // Obter informações da música (nome e artista)
+            const songTitle = 'Nossa Música Especial';
+            const songArtist = 'Playlist do Amor';
+
             musicModal.innerHTML = `
                 <div style="
                     background: linear-gradient(135deg, #ff6b9d, #e91e63);
@@ -847,8 +858,8 @@
                 ">
                     <div style="font-size: 3rem; margin-bottom: 20px;">🎵</div>
                     <h2 style="margin-bottom: 10px; font-size: 1.5rem;">Tocando Agora</h2>
-                    <h3 style="margin-bottom: 20px; font-size: 1.2rem; opacity: 0.9;">Ser Humano ou Anjo</h3>
-                    <p style="margin-bottom: 30px; opacity: 0.8;">Matheus e Kauan</p>
+                    <h3 style="margin-bottom: 20px; font-size: 1.2rem; opacity: 0.9;">${songTitle}</h3>
+                    <p style="margin-bottom: 30px; opacity: 0.8;">${songArtist}</p>
 
                     <div id="musicProgress" style="
                         width: 100%;
@@ -925,56 +936,72 @@
 
             document.body.appendChild(musicModal);
 
-            // Simulate music progress
-            let progress = 0;
+            // Controle de reprodução real do áudio
             let isPlaying = true;
             let progressInterval;
+            const audio = document.getElementById('musicAudio');
+            
+            // Iniciar reprodução do áudio
+            audio.play();
 
             // Store references for global access
             window.currentMusicModal = musicModal;
-            window.musicProgress = progress;
             window.isPlaying = isPlaying;
 
+            // Atualizar a barra de progresso com base no tempo real da música
             function updateProgress() {
-                if (isPlaying && progress < 100) {
-                    progress += 0.2; // Simulate 5 minute song
+                if (audio && audio.duration) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
                     document.getElementById('progressBar').style.width = progress + '%';
-                    window.musicProgress = progress;
                 }
 
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
+                if (audio && audio.ended) {
                     document.getElementById('playPauseBtn').textContent = '▶️';
+                    window.isPlaying = false;
+                    clearInterval(progressInterval);
                     setTimeout(() => {
-                        showCustomAlert('🎵 Música finalizada!\n\n💕 "Ser Humano ou Anjo" terminou de tocar.\n\nEspero que tenha curtido nossa música especial! 💕');
+                        showCustomAlert('🎵 Música finalizada!\n\n💕 Nossa música especial terminou de tocar.\n\nEspero que tenha curtido! 💕');
                     }, 1000);
                 }
             }
 
+            // Atualizar progresso da música
             progressInterval = setInterval(updateProgress, 100);
 
             // Global functions for music controls
             window.togglePlayPause = function() {
-                isPlaying = !isPlaying;
-                window.isPlaying = isPlaying;
-                document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸️' : '▶️';
-
-                if (isPlaying) {
-                    progressInterval = setInterval(updateProgress, 100);
-                } else {
-                    clearInterval(progressInterval);
+                if (audio) {
+                    if (isPlaying) {
+                        audio.pause();
+                        document.getElementById('playPauseBtn').textContent = '▶️';
+                    } else {
+                        audio.play();
+                        document.getElementById('playPauseBtn').textContent = '⏸️';
+                    }
+                    isPlaying = !isPlaying;
+                    window.isPlaying = isPlaying;
                 }
             };
 
             window.previousTrack = function() {
-                showCustomAlert('⏮️ Música anterior\n\n💕 Voltando para "Amo Noite e Dia" de Jorge e Mateus');
+                if (audio) {
+                    audio.currentTime = 0; // Voltar ao início da música
+                    showCustomAlert('⏮️ Voltando ao início da música');
+                }
             };
 
             window.nextTrack = function() {
-                showCustomAlert('⏭️ Próxima música\n\n💕 Tocando "10%" de Maiara e Maraisa');
+                if (audio) {
+                    audio.currentTime = audio.duration - 5; // Avançar para o final (5 segundos antes do fim)
+                    showCustomAlert('⏭️ Avançando para o final da música');
+                }
             };
 
             window.closeMusicPlayer = function() {
+                if (audio) {
+                    audio.pause();
+                    audio.remove();
+                }
                 clearInterval(progressInterval);
                 musicModal.remove();
                 // Clean up global functions
@@ -991,29 +1018,6 @@
                     window.closeMusicPlayer();
                 }
             });
-
-            // Simulate audio context for better experience
-            if (window.AudioContext || window.webkitAudioContext) {
-                try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-                    // Create a simple tone to simulate music start
-                    const oscillator = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-
-                    oscillator.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-
-                    oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4 note
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.5);
-                } catch (e) {
-                    console.log('Audio context not available');
-                }
-            }
         }
 
         // Toggle favorite

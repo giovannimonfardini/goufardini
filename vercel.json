@@ -8,6 +8,10 @@
     {
       "src": "images/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "music/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
