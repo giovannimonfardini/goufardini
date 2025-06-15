@@ -289,16 +289,22 @@
 
         .similar-item {
             aspect-ratio: 16/9;
-            background: linear-gradient(45deg, #ff6b9d, #e91e63, #ad1457);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        .similar-item-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 8px;
         }
 
         .similar-item:hover {
@@ -312,12 +318,13 @@
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
             padding: 15px 10px 10px;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
+            z-index: 2;
         }
 
         .similar-item:hover .similar-item-content {
-            opacity: 1;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
         }
 
         .similar-item-title {
@@ -740,7 +747,9 @@
             <div class="section-title">📷 Mais álbuns de fotos</div>
             <div class="similar-grid">
                 <div class="similar-item">
-                    📸
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/seflei1.JPG" alt="Selfies Juntos" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
                         <div class="similar-item-title">Selfies Juntos</div>
                         <div class="similar-item-rating">15 fotos</div>
@@ -748,7 +757,9 @@
                 </div>
 
                 <div class="similar-item">
-                    🌅
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/selfie2.jpg" alt="Pôr do Sol" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
                         <div class="similar-item-title">Pôr do Sol</div>
                         <div class="similar-item-rating">8 fotos</div>
@@ -756,7 +767,9 @@
                 </div>
 
                 <div class="similar-item">
-                    🍽️
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/selfie3.jpg" alt="Jantares Românticos" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
                         <div class="similar-item-title">Jantares Românticos</div>
                         <div class="similar-item-rating">22 fotos</div>
@@ -764,25 +777,31 @@
                 </div>
 
                 <div class="similar-item">
-                    🏖️
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/selfie4.jpg" alt="Jeronimo e Mar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
-                        <div class="similar-item-title">Praia e Mar</div>
+                        <div class="similar-item-title">Jeronimo e Amor</div>
                         <div class="similar-item-rating">19 fotos</div>
                     </div>
                 </div>
 
                 <div class="similar-item">
-                    🎂
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/selfie5.jpg" alt="Casamentos" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
-                        <div class="similar-item-title">Aniversários</div>
+                        <div class="similar-item-title">Casamentos</div>
                         <div class="similar-item-rating">11 fotos</div>
                     </div>
                 </div>
 
                 <div class="similar-item">
-                    🌸
+                    <div class="similar-item-thumbnail">
+                        <img src="images2/selfie6.jpg" alt="Formaturas" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                    </div>
                     <div class="similar-item-content">
-                        <div class="similar-item-title">Flores e Jardins</div>
+                        <div class="similar-item-title">Formaturas</div>
                         <div class="similar-item-rating">13 fotos</div>
                     </div>
                 </div>
